@@ -34,8 +34,8 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.7;
-    font-size: 1.3rem;
-    /* Drastically increased base font size */
+    font-size: 1.15rem;
+    /* Reduced base font size for refinement */
     overflow-x: hidden;
 }
 
@@ -121,12 +121,12 @@ a {
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr 1fr;
-    gap: 1rem;
-    max-width: 1300px;
+    grid-template-columns: 1.2fr 2fr 1.2fr;
+    gap: 0;
+    max-width: 1600px;
     width: 100%;
     position: relative;
-    align-items: end;
+    align-items: center;
 }
 
 .hero-col {
@@ -135,47 +135,59 @@ a {
 
 .hero-col-left {
     height: auto;
-    min-height: 300px;
-    align-self: center;
+    min-height: 350px;
     background: linear-gradient(180deg, #18222d 0%, #151d26 100%);
     box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    position: relative;
+    align-self: center;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: -60px;
+    z-index: 3;
 }
 
 .hero-col-center {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     position: relative;
     z-index: 2;
+    align-self: center;
 }
 
 .hero-portrait {
     width: 100%;
-    height: 600px;
-    object-fit: cover;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    height: auto;
+    max-height: 85vh;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-col-right {
     height: auto;
-    min-height: 300px;
-    align-self: center;
+    min-height: 420px;
+    align-self: flex-end;
     background: linear-gradient(180deg, #18222d 0%, #151d26 100%);
     box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    margin-left: -60px;
+    z-index: 3;
 }
 
 .hero-portfolio-text {
     position: absolute;
-    bottom: calc(100% - 2.5rem);
-    right: 0;
-    font-size: clamp(3rem, 8vw, 6rem);
+    bottom: calc(100% - 1.5rem);
+    left: 0;
+    text-align: left;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 400;
     font-family: 'Playfair Display', serif;
     color: var(--white);
     text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    z-index: 10;
+    z-index: 15;
     margin: 0;
     pointer-events: none;
+    text-transform: lowercase;
 }
 
 .hero-butterfly {
@@ -202,7 +214,7 @@ a {
 }
 
 .hero-box-content {
-    padding: 3rem;
+    padding: 3.5rem;
     color: var(--white);
     display: flex;
     flex-direction: column;
@@ -211,7 +223,7 @@ a {
 }
 
 .hero-col-left .hero-main-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
     line-height: 1.3;
     font-family: 'Playfair Display', serif;
 }
@@ -541,6 +553,53 @@ a {
     animation: float 8s ease-in-out infinite;
 }
 
+.work-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.work-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+/* Project Live Link */
+.project-cta {
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.live-link {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--white);
+    color: var(--bg-color);
+    font-weight: 700;
+    border-radius: 50px;
+    transition: var(--transition);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+.live-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    background: var(--accent-color);
+}
+
+.location {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
 /* Experience & Services */
 .exp-content {
     display: flex;
@@ -738,25 +797,38 @@ a {
     }
 
     .hero-grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
         align-items: center;
-        gap: 1rem;
-        margin: 0;
     }
-    
-    .hero-col-left { order: 2; align-self: stretch; }
-    .hero-col-center { order: 1; }
-    .hero-col-right { order: 3; align-self: stretch; }
-    
+
     .hero-portfolio-text {
-        position: relative;
-        text-align: right;
-        bottom: auto;
-        right: auto;
-        margin-bottom: -1rem;
-        order: 3;
-        font-size: 3.5rem;
+        display: none !important;
     }
-    
-    .hero-portrait { height: auto; max-height: 500px; }
+
+    .hero-col-left {
+        grid-column: 1;
+        min-height: auto;
+    }
+
+    .hero-col-center {
+        grid-column: 2;
+    }
+
+    .hero-col-right {
+        grid-column: 1 / span 2;
+    }
+
+    .hero-portrait {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        border-radius: 20px;
+        object-fit: contain;
+    }
+
+    .hero-main-title {
+        font-size: 1.1rem;
+    }
 }
